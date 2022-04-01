@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\marti\\OneDrive - Univerzita Palackého v Olomouci\\CorRedBlackTree\\CorRedBlackTree\\CorRedBlackTree.csproj": {}
+    "C:\\Users\\marti\\Documents\\GitHub\\RedBlackTree\\CorRedBlackTree\\CorRedBlackTree\\CorRedBlackTree.csproj": {}
   },
   "projects": {
-    "C:\\Users\\marti\\OneDrive - Univerzita Palackého v Olomouci\\CorRedBlackTree\\CorRedBlackTree\\CorRedBlackTree.csproj": {
+    "C:\\Users\\marti\\Documents\\GitHub\\RedBlackTree\\CorRedBlackTree\\CorRedBlackTree\\CorRedBlackTree.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\marti\\OneDrive - Univerzita Palackého v Olomouci\\CorRedBlackTree\\CorRedBlackTree\\CorRedBlackTree.csproj",
+        "projectUniqueName": "C:\\Users\\marti\\Documents\\GitHub\\RedBlackTree\\CorRedBlackTree\\CorRedBlackTree\\CorRedBlackTree.csproj",
         "projectName": "CorRedBlackTree",
-        "projectPath": "C:\\Users\\marti\\OneDrive - Univerzita Palackého v Olomouci\\CorRedBlackTree\\CorRedBlackTree\\CorRedBlackTree.csproj",
+        "projectPath": "C:\\Users\\marti\\Documents\\GitHub\\RedBlackTree\\CorRedBlackTree\\CorRedBlackTree\\CorRedBlackTree.csproj",
         "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\marti\\OneDrive - Univerzita Palackého v Olomouci\\CorRedBlackTree\\CorRedBlackTree\\obj\\",
+        "outputPath": "C:\\Users\\marti\\Documents\\GitHub\\RedBlackTree\\CorRedBlackTree\\CorRedBlackTree\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

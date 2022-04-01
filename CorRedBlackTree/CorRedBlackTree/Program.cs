@@ -1,17 +1,22 @@
 ﻿Random r = new();
 
-for (int j = 0; j < 100; j++)
+for (var j = 0; j < 100; j++)
 {
+    var listRands = new List<int>();
     RedBlackTree t = new();
-    for (int i = 0; i < 1000; i++)
+    for (var i = 0; i < 100; i++)
     {
-        t.Insert(new(r.Next(100)));
+        var rand = r.Next(1000);
+        listRands.Add(rand);
+        
+        t.Insert(new Node(rand));
         t.ValidationTest();
     }
     
-    for (int i = 0; i < 1000; i++)
+    for (var i = 0; i < 5; i++)
     {
-        t.Delete(t.Root);
+        listRands.ForEach(x=>t.Delete(t.Search(x)));
+        //t.Delete(t.Root);
         t.ValidationTest();
     }
 
@@ -25,7 +30,7 @@ public enum RBColor{
     Black
 }
 
-class Node
+internal class Node
 {
     public int Key { get; set; }
     public Node Left { get; set; }
@@ -46,6 +51,7 @@ class Node
 class RedBlackTree
 {
     public Node Root { get; set; }
+    
     public int Size { get; set; }
 
     public void Insert(Node z)
@@ -95,7 +101,7 @@ class RedBlackTree
         {
             if(z.Parent.Parent != null && z.Parent == z.Parent.Parent.Left)
             {
-                Node y = z.Parent.Parent.Right;
+                var y = z.Parent.Parent.Right;
                 
 
                 if(y != null && y.Color == RBColor.Red)
@@ -167,6 +173,10 @@ class RedBlackTree
 
     public void Delete(Node z)
     {
+        if (z == null)
+        {
+            return;
+        }
         Size--;
         var y = z;
         var yOriginalColor = y.Color;
@@ -187,7 +197,7 @@ class RedBlackTree
             y = Minimum(z.Right);
             yOriginalColor = y.Color;
             x = y.Right;
-            if(x != null && y.Parent == z)
+            if(x != null && y.Parent == z) //X!=null navíc
             {
                 x.Parent = y;
             }
@@ -207,15 +217,15 @@ class RedBlackTree
             y.Color = z.Color;
         }
 
-        if (yOriginalColor == RBColor.Black)
+        if (yOriginalColor == RBColor.Black && x!= null)
             DeleteFixup(x);
     }
 
     private void DeleteFixup(Node x)
     {
-        while( x != null && x != Root && x.Color == RBColor.Black)
+        while(x != Root && x.Color == RBColor.Black) //x != null navíc
         {
-            if (x == x.Parent.Left)
+            if (x == x.Parent.Left) 
             {
                 var w = x.Parent.Right;
 
@@ -226,14 +236,14 @@ class RedBlackTree
                     LeftRotate(x.Parent);
                     w = x.Parent.Right;
                 }
-                if (w.Left.Color == RBColor.Black && w.Right.Color == RBColor.Black)
+                if ((w.Left == null || w.Left.Color == RBColor.Black) && (w.Right == null || w.Right.Color == RBColor.Black)) //checky navíc
                 {
                     w.Color = RBColor.Red;
                     x = x.Parent;
                 }
                 else
                 {
-                    if (w.Right.Color == RBColor.Black)
+                    if (w.Right == null || w.Right.Color == RBColor.Black)
                     {
                         w.Left.Color = RBColor.Black;
                         w.Color = RBColor.Red;
@@ -258,14 +268,15 @@ class RedBlackTree
                     RightRotate(x.Parent);
                     w = x.Parent.Left;
                 }
-                if (w.Right.Color == RBColor.Black && w.Left.Color == RBColor.Black)
+                if ((w.Right == null || w.Right.Color == RBColor.Black) && (w.Left == null || w.Left.Color == RBColor.Black)) //Checky
                 {
-                    w.Color = RBColor.Red;
+                   
+                        w.Color = RBColor.Red;
                     x = x.Parent;
                 }
                 else
                 {
-                    if (w.Left.Color == RBColor.Black)
+                    if (w.Left == null || w.Left.Color == RBColor.Black) //check
                     {
                         w.Right.Color = RBColor.Black;
                         w.Color = RBColor.Red;
@@ -399,5 +410,20 @@ class RedBlackTree
 
         ValidationTest(node.Left);
         ValidationTest(node.Right);
+    }
+
+    public Node Search(int key)
+    {
+        var node = Root;
+        while (node != null)
+        {
+            if (node.Key == key)
+                return node;
+            if (node.Key < key)
+                node = node.Right;
+            else
+                node = node.Left;
+        }
+        return null;
     }
 }
