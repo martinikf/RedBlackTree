@@ -1,33 +1,55 @@
 ﻿Random r = new();
 
-for (var j = 0; j < 1000; j++)
+for (var j = 0; j < 10; j++)
 {
     var listRands = new List<int>();
     RedBlackTree t = new();
     
-    for (var i = 0; i < 50; i++)
+    for (var i = 0; i < 10; i++)
     {
         var rand = r.Next(100);
         listRands.Add(rand);
-        Console.WriteLine("Insert: "  + rand);
+        Console.WriteLine(i + ". " + "Insert: " + rand);
         t.Insert(new Node(rand));
         t.ValidationTest();
     }
-    
+
     listRands = Shuffle(listRands);
-    
-    for (var i = 0; i < 50; i++)
+
+    for (var i = 0; i < 10; i++)
     {
-        Console.WriteLine(i +". "+ "Delete: " + listRands[i]);
+        Console.WriteLine(i + ". " + "Delete: " + listRands[i]);
         t.Delete(t.Search(listRands[i]));
         t.ValidationTest();
-        
+
         //t.Delete(t.Root);
 
     }
     t.InOrder(t.Root);
+    
+    /*
+    while (true)
+    {
+        try
+        {
+            switch (Console.ReadLine())
+            {
+                case "i":
+                    t.Insert(new Node(int.Parse(Console.ReadLine())));
+                    break;
+                case "d":
+                    t.Delete(t.Search(int.Parse(Console.ReadLine())));
+                    break;
+            }
+        }
+        catch
+        {
 
+        }
+        t.InOrder(t.Root);
+    }
     Console.WriteLine();
+    */
 }
 
 static List<T> Shuffle<T>(List<T> list)
@@ -44,7 +66,8 @@ static List<T> Shuffle<T>(List<T> list)
 }
 
 
-public enum RbColor{
+public enum RbColor
+{
     Red,
     Black
 }
@@ -70,7 +93,7 @@ internal class Node
 internal class RedBlackTree
 {
     public Node? Root { get; set; }
-    
+
     public int Size { get; set; }
 
     public void Insert(Node z)
@@ -94,7 +117,7 @@ internal class RedBlackTree
 
         z.Parent = y;
 
-        if(y == null)
+        if (y == null)
         {
             this.Root = z;
         }
@@ -116,14 +139,14 @@ internal class RedBlackTree
 
     private void InsertFixup(Node z)
     {
-        while(z.Parent is {Color: RbColor.Red})
+        while (z.Parent is { Color: RbColor.Red })
         {
-            if(z.Parent.Parent != null && z.Parent == z.Parent.Parent.Left)
+            if (z.Parent.Parent != null && z.Parent == z.Parent.Parent.Left)
             {
                 var y = z.Parent.Parent.Right;
-                
 
-                if(y is {Color: RbColor.Red})
+
+                if (y is { Color: RbColor.Red })
                 {
                     z.Parent.Color = RbColor.Black;
                     y.Color = RbColor.Black;
@@ -147,7 +170,7 @@ internal class RedBlackTree
             {
                 var y = z.Parent.Parent.Left;
 
-                if (y is {Color: RbColor.Red})
+                if (y is { Color: RbColor.Red })
                 {
                     z.Parent.Color = RbColor.Black;
                     y.Color = RbColor.Black;
@@ -174,11 +197,11 @@ internal class RedBlackTree
 
     private void Transplant(Node u, Node? v)
     {
-        if(u.Parent == null) 
-        { 
-            Root = v; 
+        if (u.Parent == null)
+        {
+            Root = v;
         }
-        else if(u == u.Parent.Left)
+        else if (u == u.Parent.Left)
         {
             u.Parent.Left = v;
         }
@@ -186,7 +209,7 @@ internal class RedBlackTree
         {
             u.Parent.Right = v;
         }
-        if(v != null)
+        if (v != null)
             v.Parent = u.Parent;
     }
 
@@ -197,17 +220,17 @@ internal class RedBlackTree
             return;
         }
         Size--;
-        
+
         var y = z;
         var yOriginalColor = y.Color;
         Node? x;
 
-        if(z.Left == null)
+        if (z.Left == null)
         {
             x = z.Right;
             Transplant(z, z.Right);
         }
-        else if(z.Right == null)
+        else if (z.Right == null)
         {
             x = z.Left;
             Transplant(z, z.Left);
@@ -217,9 +240,9 @@ internal class RedBlackTree
             y = Minimum(z.Right);
             yOriginalColor = y.Color;
             x = y.Right;
-            if(y.Parent == z)
+            if (y.Parent == z)
             {
-                if(x!=null)             //Check navíc
+                if (x != null)             //Check navíc
                     x.Parent = y;
             }
             else
@@ -245,36 +268,36 @@ internal class RedBlackTree
     private void DeleteFixup(Node? x)
     {
         if (x == null) return;
-        
-        while(x != Root && x.Color == RbColor.Black) 
+
+        while (x != Root && x.Color == RbColor.Black)
         {
             if (x.Parent != null && x == x.Parent.Left) //Check parent != null
             {
                 var w = x.Parent.Right;
 
-                if (w is {Color: RbColor.Red}) //Check w != null
+                if (w is { Color: RbColor.Red }) //Check w != null
                 {
                     w.Color = RbColor.Black;
                     x.Parent.Color = RbColor.Red;
                     LeftRotate(x.Parent);
                     w = x.Parent.Right;
                 }
-                if (w != null && (w.Left == null ||w.Left.Color == RbColor.Black) && (w.Right == null ||w.Right.Color == RbColor.Black)) //3 checks
+                if (w != null && (w.Left == null || w.Left.Color == RbColor.Black) && (w.Right == null || w.Right.Color == RbColor.Black)) //3 checks
                 {
                     w.Color = RbColor.Red;
                     x = x.Parent;
                 }
                 else
                 {
-                    if (w!=null && (w.Right == null || w.Right.Color == RbColor.Black)) //Check w.right == null w!=null
+                    if (w != null && (w.Right == null || w.Right.Color == RbColor.Black)) //Check w.right == null w!=null
                     {
-                        if(w.Left != null) //Check
+                        if (w.Left != null) //Check
                             w.Left.Color = RbColor.Black;
                         w.Color = RbColor.Red;
                         RightRotate(w);
                         w = x.Parent.Right;
                     }
-                    if(w!=null)
+                    if (w != null)
                         w.Color = x.Parent.Color;
                     x.Parent.Color = RbColor.Black;
                     if (w != null && w.Right != null)
@@ -283,7 +306,7 @@ internal class RedBlackTree
                     x = Root;
                 }
             }
-            else if(x.Parent != null)
+            else if (x.Parent != null)
             {
                 var w = x.Parent.Left;
 
@@ -319,7 +342,7 @@ internal class RedBlackTree
                 }
             }
         }
-        if(x != null)
+        if (x != null)
             x.Color = RbColor.Black;
     }
 
@@ -335,19 +358,19 @@ internal class RedBlackTree
     private void LeftRotate(Node? x)
     {
         if (x == null || x.Right == null) return; //zvláštní check pro x.right proč se LeftRotate volá v ten moment?
-        
+
         var y = x.Right;
         x.Right = y.Left;
-        if(y.Left != null)
+        if (y.Left != null)
         {
             y.Left.Parent = x;
         }
         y.Parent = x.Parent;
-        if(x.Parent == null)
+        if (x.Parent == null)
         {
             Root = y;
         }
-        else if(x == x.Parent.Left)
+        else if (x == x.Parent.Left)
         {
             x.Parent.Left = y;
         }
@@ -387,13 +410,13 @@ internal class RedBlackTree
         y.Right = x;
         x.Parent = y;
     }
-   
+
     public void InOrder(Node node)
     {
         if (node == null) return;
 
         InOrder(node.Left);
-        if(node.Color == RbColor.Red)
+        if (node.Color == RbColor.Red)
         {
             Console.ForegroundColor = ConsoleColor.Red;
         }
@@ -415,8 +438,10 @@ internal class RedBlackTree
 
     public void ValidationTest()
     {
-        if (Root == null) return;
+        //TODO test 5. condition black nodes = all paths to leafs
         
+        if (Root == null) return;
+
         if (Root != null && Root.Color == RbColor.Red)
         {
             throw new Exception("Root is red");
@@ -428,8 +453,6 @@ internal class RedBlackTree
         }
 
         ValidationTest(Root);
-        //Not sure if works correctly
-        //PathBlackCount(Root);
     }
 
     private void ValidationTest(Node? node)
@@ -459,24 +482,5 @@ internal class RedBlackTree
                 node = node.Left;
         }
         return null;
-    }
-
-
-    //Method check for every node that all paths from node to leafs have the same count of black nodes
-    private int PathBlackCount(Node? node)
-    {
-        if (node == null)
-            return 0;
-
-        var leftCount = PathBlackCount(node.Left);
-        var rightCount = PathBlackCount(node.Right);
-
-        if ( (leftCount == -1 || rightCount == -1))
-            return -1;
-
-        if (node.Left != null && node.Right != null && leftCount != rightCount)
-            throw new Exception("Different black count");
-
-        return leftCount + (node.Color == RbColor.Black ? 1 : 0);
     }
 }
