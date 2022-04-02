@@ -1,38 +1,27 @@
 ﻿Random r = new();
 
-for (var j = 0; j < 10; j++)
+RandomTreeTest(10, 100, 90, 0, 1000, true);
+
+InteractiveTree();
+
+static void Shuffle<T>(IList<T> list)
 {
-    var listRands = new List<int>();
+    var r = new Random();
+    for (var i = 0; i < list.Count; i++)
+    {
+        var j = r.Next(list.Count);
+        (list[i], list[j]) = (list[j], list[i]);
+    }
+}
+
+void InteractiveTree()
+{
     RedBlackTree t = new();
-    
-    for (var i = 0; i < 10; i++)
-    {
-        var rand = r.Next(100);
-        listRands.Add(rand);
-        Console.WriteLine(i + ". " + "Insert: " + rand);
-        t.Insert(new Node(rand));
-        t.ValidationTest();
-    }
-
-    listRands = Shuffle(listRands);
-
-    for (var i = 0; i < 10; i++)
-    {
-        Console.WriteLine(i + ". " + "Delete: " + listRands[i]);
-        t.Delete(t.Search(listRands[i]));
-        t.ValidationTest();
-
-        //t.Delete(t.Root);
-
-    }
-    t.InOrder(t.Root);
-    
-    /*
     while (true)
     {
         try
         {
-            switch (Console.ReadLine())
+            switch (Console.ReadLine()?.ToLower())
             {
                 case "i":
                     t.Insert(new Node(int.Parse(Console.ReadLine())));
@@ -40,31 +29,48 @@ for (var j = 0; j < 10; j++)
                 case "d":
                     t.Delete(t.Search(int.Parse(Console.ReadLine())));
                     break;
+                case "p":
+                    t.InOrder(t.Root);
+                    break;
             }
         }
         catch
         {
-
+            Console.WriteLine("Invalid input");
         }
         t.InOrder(t.Root);
     }
-    Console.WriteLine();
-    */
 }
 
-static List<T> Shuffle<T>(List<T> list)
+void RandomTreeTest(int trees, int insert, int delete, int minKey, int maxKey, bool print)
 {
-    var r = new Random();
-    for (var i = 0; i < list.Count; i++)
+    for (var j = 0; j < trees; j++)
     {
-        var j = r.Next(list.Count);
-        var temp = list[i];
-        list[i] = list[j];
-        list[j] = temp;
-    }
-    return list;
-}
+        var listRands = new List<int>();
+        RedBlackTree t = new();
 
+        for (var i = 0; i < insert; i++)
+        {
+            var rand = r.Next(minKey, maxKey);
+            listRands.Add(rand);
+            Console.WriteLine(i + ". " + "Insert: " + rand);
+            t.Insert(new Node(rand));
+            t.ValidationTest();
+        }
+
+        Shuffle(listRands);
+
+        for (var i = 0; i < delete; i++)
+        {
+            Console.WriteLine(i + ". " + "Delete: " + listRands[i]);
+            t.Delete(t.Search(listRands[i]));
+            t.ValidationTest();
+        }
+
+        if(print)
+            t.InOrder(t.Root);
+    }
+}
 
 public enum RbColor
 {
@@ -99,8 +105,8 @@ internal class RedBlackTree
     public void Insert(Node z)
     {
         Size++;
-        Node y = null;
-        Node x = this.Root;
+        Node? y = null;
+        var x = this.Root;
 
         while (x != null)
         {
@@ -411,27 +417,24 @@ internal class RedBlackTree
         x.Parent = y;
     }
 
-    public void InOrder(Node node)
+    public void InOrder(Node? node)
     {
-        if (node == null) return;
+        while (true)
+        {
+            if (node == null) return;
 
-        InOrder(node.Left);
-        if (node.Color == RbColor.Red)
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-        }
-        else
-        {
+            InOrder(node.Left);
+            Console.ForegroundColor = node.Color == RbColor.Red ? ConsoleColor.Red : ConsoleColor.White;
+
+            Console.Write(node.Key);
             Console.ForegroundColor = ConsoleColor.White;
-        }
-        Console.Write(node.Key);
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.Write(", ");
+            Console.Write(", ");
 
-        InOrder(node.Right);
+            node = node.Right;
+        }
     }
 
-    private int Depth(Node? node)
+    private static int Depth(Node? node)
     {
         return node == null ? 1 : Math.Max(Depth(node.Left), Depth(node.Right));
     }
@@ -455,7 +458,7 @@ internal class RedBlackTree
         ValidationTest(Root);
     }
 
-    private void ValidationTest(Node? node)
+    private static void ValidationTest(Node? node)
     {
         if (node is null)
             return;
@@ -469,17 +472,14 @@ internal class RedBlackTree
         ValidationTest(node.Right);
     }
 
-    public Node Search(int key)
+    public Node? Search(int key)
     {
         var node = Root;
         while (node != null)
         {
             if (node.Key == key)
                 return node;
-            if (node.Key < key)
-                node = node.Right;
-            else
-                node = node.Left;
+            node = node.Key < key ? node.Right : node.Left;
         }
         return null;
     }
