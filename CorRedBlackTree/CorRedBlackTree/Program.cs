@@ -1,6 +1,4 @@
-﻿Random r = new();
-
-RandomTreeTest(10, 100, 90, 0, 1000, true);
+﻿RandomTreeTest(10, 100, 90, 0, 1000, true);
 
 InteractiveTree();
 
@@ -51,7 +49,7 @@ void RandomTreeTest(int trees, int insert, int delete, int minKey, int maxKey, b
 
         for (var i = 0; i < insert; i++)
         {
-            var rand = r.Next(minKey, maxKey);
+            var rand = Random.Shared.Next(minKey, maxKey);
             listRands.Add(rand);
             Console.WriteLine(i + ". " + "Insert: " + rand);
             t.Insert(new Node(rand));
@@ -67,8 +65,8 @@ void RandomTreeTest(int trees, int insert, int delete, int minKey, int maxKey, b
             t.ValidationTest();
         }
 
-        if(print)
-            t.InOrder(t.Root);
+        if (print)
+            t.PreOrder(t.Root);
     }
 }
 
@@ -434,6 +432,22 @@ internal class RedBlackTree
         }
     }
 
+    //preorder print
+    public void PreOrder(Node? node)
+    {
+
+        if (node == null) return;
+
+        Console.ForegroundColor = node.Color == RbColor.Red ? ConsoleColor.Red : ConsoleColor.White;
+
+        Console.Write(node.Key);
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.Write(", ");
+
+        PreOrder(node.Left);
+        PreOrder(node.Right);
+    }
+
     private static int Depth(Node? node)
     {
         return node == null ? 1 : Math.Max(Depth(node.Left), Depth(node.Right));
@@ -442,7 +456,7 @@ internal class RedBlackTree
     public void ValidationTest()
     {
         //TODO test 5. condition black nodes = all paths to leafs
-        
+
         if (Root == null) return;
 
         if (Root != null && Root.Color == RbColor.Red)
