@@ -1,11 +1,10 @@
-﻿RandomTreeTest(10, 7, 3, 0, 99, true, false);
-
-InteractiveTree();
+﻿RandomTreeTest(10, 10000, 9990, 0, 99, false, false, false);
 
 List<int> ins = new() { 78, 50, 2, 20, 68, 19, 39 };
 List<int> del = new() { 20, 2, 39 };
+CaseTest(ins, del);
 
-//CaseTest(ins, del);
+InteractiveTree();
 
 static void CaseTest(List<int> ins, List<int> del)
 {
@@ -69,7 +68,7 @@ static void InteractiveTree()
     }
 }
 
-static void RandomTreeTest(int trees, int insert, int delete, int minKey, int maxKey, bool print, bool stepper)
+static void RandomTreeTest(int trees, int insert, int delete, int minKey, int maxKey, bool print, bool result, bool stepper)
 {
     for (var j = 0; j < trees; j++)
     {
@@ -80,7 +79,7 @@ static void RandomTreeTest(int trees, int insert, int delete, int minKey, int ma
         {
             var rand = Random.Shared.Next(minKey, maxKey);
             listRands.Add(rand);
-            Console.WriteLine(i + ". " + "Insert: " + rand);
+            if (print) Console.WriteLine(i + ". " + "Insert: " + rand);
             t.Insert(new Node(rand));
             t.ValidationTest();
         }
@@ -92,12 +91,12 @@ static void RandomTreeTest(int trees, int insert, int delete, int minKey, int ma
 
         for (var i = 0; i < delete; i++)
         {
-            Console.WriteLine(i + ". " + "Delete: " + listRands[i]);
+            if (print) Console.WriteLine(i + ". " + "Delete: " + listRands[i]);
             t.Delete(t.Search(listRands[i]));
             t.ValidationTest();
         }
 
-        if (print)
+        if (print || result)
             RedBlackTreePrinter.PrintNode(t.Root);
         if (stepper)
             Console.ReadLine();
@@ -112,7 +111,7 @@ public enum RbColor
 
 internal class Node
 {
-    public int Key { get; set; }
+    public int Key { get; }
     public Node Left { get; set; }
     public Node Right { get; set; }
     public Node Parent { get; set; }
@@ -561,10 +560,9 @@ internal class RedBlackTree
         ValidationTest(node.Right);
     }
 
-
 }
 
-//Tohle jsem nenapsal!
+//RedBlackTreePrinter, ukraden od spolužáka. Ten to ukradl nevím odkud.
 internal static class RedBlackTreePrinter
 {
     public static void PrintNode(Node root)

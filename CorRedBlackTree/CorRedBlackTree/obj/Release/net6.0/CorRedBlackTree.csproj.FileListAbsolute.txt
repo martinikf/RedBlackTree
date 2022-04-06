@@ -1,0 +1,15 @@
+C:\Users\marti\Documents\GitHub\RedBlackTree\CorRedBlackTree\CorRedBlackTree\bin\Release\net6.0\CorRedBlackTree.exe
+C:\Users\marti\Documents\GitHub\RedBlackTree\CorRedBlackTree\CorRedBlackTree\bin\Release\net6.0\CorRedBlackTree.deps.json
+C:\Users\marti\Documents\GitHub\RedBlackTree\CorRedBlackTree\CorRedBlackTree\bin\Release\net6.0\CorRedBlackTree.runtimeconfig.json
+C:\Users\marti\Documents\GitHub\RedBlackTree\CorRedBlackTree\CorRedBlackTree\bin\Release\net6.0\CorRedBlackTree.dll
+C:\Users\marti\Documents\GitHub\RedBlackTree\CorRedBlackTree\CorRedBlackTree\bin\Release\net6.0\CorRedBlackTree.pdb
+C:\Users\marti\Documents\GitHub\RedBlackTree\CorRedBlackTree\CorRedBlackTree\obj\Release\net6.0\CorRedBlackTree.csproj.AssemblyReference.cache
+C:\Users\marti\Documents\GitHub\RedBlackTree\CorRedBlackTree\CorRedBlackTree\obj\Release\net6.0\CorRedBlackTree.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\marti\Documents\GitHub\RedBlackTree\CorRedBlackTree\CorRedBlackTree\obj\Release\net6.0\CorRedBlackTree.AssemblyInfoInputs.cache
+C:\Users\marti\Documents\GitHub\RedBlackTree\CorRedBlackTree\CorRedBlackTree\obj\Release\net6.0\CorRedBlackTree.AssemblyInfo.cs
+C:\Users\marti\Documents\GitHub\RedBlackTree\CorRedBlackTree\CorRedBlackTree\obj\Release\net6.0\CorRedBlackTree.csproj.CoreCompileInputs.cache
+C:\Users\marti\Documents\GitHub\RedBlackTree\CorRedBlackTree\CorRedBlackTree\obj\Release\net6.0\CorRedBlackTree.dll
+C:\Users\marti\Documents\GitHub\RedBlackTree\CorRedBlackTree\CorRedBlackTree\obj\Release\net6.0\refint\CorRedBlackTree.dll
+C:\Users\marti\Documents\GitHub\RedBlackTree\CorRedBlackTree\CorRedBlackTree\obj\Release\net6.0\CorRedBlackTree.pdb
+C:\Users\marti\Documents\GitHub\RedBlackTree\CorRedBlackTree\CorRedBlackTree\obj\Release\net6.0\CorRedBlackTree.genruntimeconfig.cache
+C:\Users\marti\Documents\GitHub\RedBlackTree\CorRedBlackTree\CorRedBlackTree\obj\Release\net6.0\ref\CorRedBlackTree.dll
