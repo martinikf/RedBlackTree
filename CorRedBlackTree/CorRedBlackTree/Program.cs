@@ -527,7 +527,7 @@ internal class RedBlackTree
 
     public void ValidationTest()
     {
-        //TODO test 5. condition black nodes = all paths to leafs
+        //TODO test 5. condition
 
         if (Root == Nil) return;
 
@@ -559,7 +559,6 @@ internal class RedBlackTree
         ValidationTest(node.Left);
         ValidationTest(node.Right);
     }
-
 }
 
 //RedBlackTreePrinter, ukraden od spolužáka. Ten to ukradl nevím odkud.
