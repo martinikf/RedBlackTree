@@ -1,4 +1,4 @@
-﻿RandomTreeTest(10, 10000, 9990, 0, 99, false, false, false);
+﻿//RandomTreeTest(10, 10000, 9990, 0, 99, false, true, false);
 
 List<int> ins = new() { 78, 50, 2, 20, 68, 19, 39 };
 List<int> del = new() { 20, 2, 39 };
@@ -413,7 +413,7 @@ internal class RedBlackTree
         else
         {
             u.Parent.Right = v;
-        }
+        }//Check v != nil missing?
         v.Parent = u.Parent;
     }
 
