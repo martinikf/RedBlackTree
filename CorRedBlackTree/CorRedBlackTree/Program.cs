@@ -402,7 +402,7 @@ internal class RedBlackTree
 #if DEBUG
         Console.WriteLine("Transplant: " + u.Key + " | " + v.Key);
 #endif
-        if (u.Parent == Nil) //Should be null not nil?
+        if (u.Parent == Nil)
         {
             Root = v;
         }
@@ -413,7 +413,7 @@ internal class RedBlackTree
         else
         {
             u.Parent.Right = v;
-        }//Check v != nil missing?
+        }
         v.Parent = u.Parent;
     }
 
