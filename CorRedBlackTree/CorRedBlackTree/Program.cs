@@ -1,18 +1,18 @@
-﻿//RandomTreeTest(10, 10000, 9990, 0, 99, false, true, false);
+﻿RandomTreeTest(10, 100, 50, 0, 1000, false, false, false);
 
 List<int> ins = new() { 78, 50, 2, 20, 68, 19, 39 };
 List<int> del = new() { 20, 2, 39 };
 CaseTest(ins, del);
-
+Console.WriteLine("----------------------------------------------------");
 InteractiveTree();
 
-static void CaseTest(List<int> ins, List<int> del)
+static void CaseTest(List<int> insertList, List<int> deleteList)
 {
     RedBlackTree tree = new();
 
-    ins.ForEach(i => tree.Insert(new Node(i)));
+    insertList.ForEach(i => tree.Insert(new Node(i)));
     RedBlackTreePrinter.PrintNode(tree.Root);
-    del.ForEach(i =>
+    deleteList.ForEach(i =>
     {
         tree.Delete(tree.Search(i));
         RedBlackTreePrinter.PrintNode(tree.Root);
@@ -37,7 +37,7 @@ static void InteractiveTree()
     {
         try
         {
-            Console.WriteLine("Operace i, d, p, in, pre, q:");
+            Console.WriteLine("Operation: i (insert), d (delete), p (print), in, pre, q (quit):");
             switch (Console.ReadLine()?.ToLower())
             {
                 case "i":
